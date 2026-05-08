@@ -1,0 +1,14 @@
+{
+  "summary": "Tone shifted from permissive to strict; added hard limits on off-topic queries.",
+  "additions": [
+    "Explicit instruction to refuse off-topic questions",
+    "Hard word limit of 200 tokens per response",
+    "Escalation path for complex queries"
+  ],
+  "removals": [
+    "\"Feel free to explore\" phrasing",
+    "Open-ended example in the few-shot section"
+  ],
+  "tone_shift": "Permissive → Strict / Professional",
+  "structural_changes": []
+}

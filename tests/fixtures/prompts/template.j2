@@ -1,0 +1,16 @@
+You are a {{ role }} for {{ company }}.
+
+{% if strict_mode %}
+IMPORTANT: You must follow all safety guidelines strictly.
+Do NOT provide advice on topics outside your scope.
+{% endif %}
+
+Your responsibilities:
+{% for task in tasks %}
+- {{ task }}
+{% endfor %}
+
+{% block examples %}
+Here are some examples of how to respond:
+{{ examples }}
+{% endblock %}

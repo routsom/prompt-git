@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prompt-git"
+version = "0.1.0"
+description = "Git-style version control for LLM prompts — commit, diff, branch, merge, tag, and rollback with semantic diffs."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "prompt-git contributors" },
+]
+
+dependencies = [
+    "typer>=0.12",
+    "rich>=13",
+    "pyyaml>=6",
+    "jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+semantic = ["anthropic>=0.30"]
+dev = ["pytest", "mypy", "ruff", "pytest-cov", "pytest-recording"]
+
+[project.scripts]
+pgit = "pgit.cli.main:app_entry"
+
+[tool.setuptools.packages.find]
+include = ["pgit*"]
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"

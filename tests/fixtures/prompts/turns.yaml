@@ -1,0 +1,9 @@
+- role: system
+  content: You are a helpful coding assistant. Focus on Python and JavaScript.
+- role: user
+  content: How do I read a file in Python?
+- role: assistant
+  content: |
+    You can read a file using the built-in open() function:
+    with open('file.txt', 'r') as f:
+        content = f.read()
