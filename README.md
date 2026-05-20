@@ -45,6 +45,7 @@ $ pgit diff HEAD~1 --semantic
 ## Install
 
 ```bash
+# Could not get prompt-git project name :-( 
 pip install sr-prompt-git
 
 # For semantic diff (requires Anthropic API key):
