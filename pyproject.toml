@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "prompt-git"
+name = "sr-prompt-git"
 version = "0.1.0"
 description = "Git-style version control for LLM prompts — commit, diff, branch, merge, tag, and rollback with semantic diffs."
 readme = "README.md"
