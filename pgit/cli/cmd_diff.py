@@ -9,6 +9,7 @@ from rich.console import Console
 from rich.syntax import Syntax
 
 from pgit.diff import line_diff
+from pgit.objects import SemanticDiff
 from pgit.repo import PromptRepo
 
 console = Console()
@@ -63,7 +64,7 @@ def diff(
                 console.print(syntax)
 
 
-def _print_semantic_diff(sd, from_label: str, to_label: str) -> None:
+def _print_semantic_diff(sd: SemanticDiff, from_label: str, to_label: str) -> None:
     """Pretty-print a semantic diff."""
     console.print(f"\n  [bold]Semantic diff: {from_label} → {to_label}[/bold]")
     console.print("  " + "─" * 55)

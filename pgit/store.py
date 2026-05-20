@@ -6,6 +6,7 @@ import json
 import sqlite3
 import uuid
 from pathlib import Path
+from typing import Any
 
 from pgit.objects import Blob, Commit, EvalScore, SemanticDiff, Tag, Tree
 
@@ -72,7 +73,7 @@ class ObjectStore:
     # Generic object CRUD
     # ------------------------------------------------------------------
 
-    def put_object(self, obj_hash: str, obj_type: str, data: dict) -> None:
+    def put_object(self, obj_hash: str, obj_type: str, data: dict[str, Any]) -> None:
         """Store a content-addressed object (idempotent)."""
         self._conn.execute(
             "INSERT OR IGNORE INTO objects (hash, type, data) VALUES (?, ?, ?)",
@@ -80,7 +81,7 @@ class ObjectStore:
         )
         self._conn.commit()
 
-    def get_object(self, obj_hash: str) -> tuple[str, dict] | None:
+    def get_object(self, obj_hash: str) -> tuple[str, dict[str, Any]] | None:
         """Return (type, data) or None."""
         row = self._conn.execute(
             "SELECT type, data FROM objects WHERE hash = ?", (obj_hash,)
@@ -95,7 +96,7 @@ class ObjectStore:
         ).fetchone()
         return row is not None
 
-    def list_objects(self, obj_type: str | None = None) -> list[tuple[str, dict]]:
+    def list_objects(self, obj_type: str | None = None) -> list[tuple[str, dict[str, Any]]]:
         """List all objects, optionally filtered by type."""
         if obj_type:
             rows = self._conn.execute(

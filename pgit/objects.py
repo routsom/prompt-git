@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import asdict, dataclass, field
+from typing import Any
 
 
 # ---------------------------------------------------------------------------
@@ -80,11 +81,11 @@ class Blob:
         h = hash_blob(content, format, model_hint)
         return cls(hash=h, content=content, format=format, model_hint=model_hint)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, d: dict) -> Blob:
+    def from_dict(cls, d: dict[str, Any]) -> Blob:
         return cls(**d)
 
 
@@ -100,11 +101,11 @@ class Tree:
         h = hash_tree(entries)
         return cls(hash=h, entries=entries)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, d: dict) -> Tree:
+    def from_dict(cls, d: dict[str, Any]) -> Tree:
         return cls(**d)
 
 
@@ -119,7 +120,7 @@ class Commit:
     author: str
     committed_at: str  # ISO-8601
     eval_scores: dict[str, float] = field(default_factory=dict)
-    metadata: dict = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
     @classmethod
     def create(
@@ -129,7 +130,7 @@ class Commit:
         message: str,
         author: str,
         committed_at: str,
-        metadata: dict | None = None,
+        metadata: dict[str, Any] | None = None,
     ) -> Commit:
         h = hash_commit(parent, tree, message, author, committed_at)
         return cls(
@@ -143,11 +144,11 @@ class Commit:
             metadata=metadata or {},
         )
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, d: dict) -> Commit:
+    def from_dict(cls, d: dict[str, Any]) -> Commit:
         return cls(**d)
 
 
@@ -164,11 +165,11 @@ class Tag:
         h = hash_tag(name, target, message, created_at)
         return cls(hash=h, name=name, target=target, message=message, created_at=created_at)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, d: dict) -> Tag:
+    def from_dict(cls, d: dict[str, Any]) -> Tag:
         return cls(**d)
 
 
@@ -190,11 +191,11 @@ class SemanticDiff:
     def cache_key(self) -> str:
         return f"{self.from_hash}:{self.to_hash}"
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, d: dict) -> SemanticDiff:
+    def from_dict(cls, d: dict[str, Any]) -> SemanticDiff:
         return cls(**d)
 
 
@@ -206,9 +207,9 @@ class EvalScore:
     recorded_at: str
     notes: str | None
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, d: dict) -> EvalScore:
+    def from_dict(cls, d: dict[str, Any]) -> EvalScore:
         return cls(**d)

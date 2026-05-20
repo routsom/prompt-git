@@ -310,7 +310,7 @@ class PromptRepo:
 
         return merge_commit
 
-    def status(self) -> dict:
+    def status(self) -> dict[str, str | None | list[tuple[str, str]] | list[str]]:
         """Return repository status."""
         staged = self.index.staged_entries()
         head = self.branches.resolve_head()

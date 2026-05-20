@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import List
-
 import typer
 from rich.console import Console
 
@@ -13,7 +11,7 @@ console = Console()
 
 
 def add(
-    files: List[str] = typer.Argument(..., help="Prompt files to stage."),
+    files: list[str] = typer.Argument(..., help="Prompt files to stage."),
     model: str | None = typer.Option(None, "--model", help="Model hint for staged files."),
 ) -> None:
     """Stage prompt files for commit."""
