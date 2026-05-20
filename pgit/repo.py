@@ -7,6 +7,7 @@ import re
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 from pgit.branch import BranchManager
 from pgit.eval import EvalManager
@@ -155,7 +156,7 @@ class PromptRepo:
             return []
 
         commits: list[Commit] = []
-        current = commit_hash
+        current: str | None = commit_hash
         while current and len(commits) < limit:
             commit = self.store.get_commit(current)
             if commit is None:
@@ -310,7 +311,7 @@ class PromptRepo:
 
         return merge_commit
 
-    def status(self) -> dict[str, str | None | list[tuple[str, str]] | list[str]]:
+    def status(self) -> dict[str, Any]:
         """Return repository status."""
         staged = self.index.staged_entries()
         head = self.branches.resolve_head()

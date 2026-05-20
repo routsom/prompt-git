@@ -67,7 +67,7 @@ def generate_semantic_diff(
     model = os.environ.get("PGIT_LLM_MODEL", "claude-haiku-4-5-20251001")
 
     try:
-        import anthropic
+        import anthropic  # type: ignore[import-not-found]
     except ImportError:
         raise RuntimeError(
             "The 'anthropic' package is required for semantic diff. "

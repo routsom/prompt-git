@@ -22,7 +22,7 @@ dependencies = [
 
 [project.optional-dependencies]
 semantic = ["anthropic>=0.30"]
-dev = ["pytest", "mypy", "ruff", "pytest-cov", "pytest-recording"]
+dev = ["pytest", "mypy", "ruff", "pytest-cov", "pytest-recording", "types-PyYAML"]
 
 [project.scripts]
 pgit = "pgit.cli.main:app_entry"
