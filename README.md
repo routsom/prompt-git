@@ -2,9 +2,9 @@
 
 **Git for your prompts. Commit, diff, branch, merge, and rollback LLM prompts — with semantic diffs that tell you what *meaning* changed.**
 
-[![CI](https://github.com/your-org/prompt-git/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/prompt-git/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/prompt-git)](https://pypi.org/project/prompt-git/)
-[![Python](https://img.shields.io/pypi/pyversions/prompt-git)](https://pypi.org/project/prompt-git/)
+[![CI](https://github.com/routsom/prompt-git/actions/workflows/ci.yml/badge.svg)](https://github.com/routsom/prompt-git/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/sr-prompt-git)](https://pypi.org/project/sr-prompt-git/)
+[![Python](https://img.shields.io/pypi/pyversions/sr-prompt-git)](https://pypi.org/project/sr-prompt-git/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -45,10 +45,10 @@ $ pgit diff HEAD~1 --semantic
 ## Install
 
 ```bash
-pip install prompt-git
+pip install sr-prompt-git
 
 # For semantic diff (requires Anthropic API key):
-pip install prompt-git[semantic]
+pip install sr-prompt-git[semantic]
 export PGIT_LLM_KEY=sk-ant-...
 ```
 
