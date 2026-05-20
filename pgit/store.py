@@ -225,7 +225,10 @@ class ObjectStore:
         self._conn.execute(
             "INSERT INTO eval_scores (id, commit_hash, metric, value, recorded_at, notes) "
             "VALUES (?, ?, ?, ?, ?, ?)",
-            (score_id, score.commit_hash, score.metric, score.value, score.recorded_at, score.notes),
+            (
+                score_id, score.commit_hash, score.metric,
+                score.value, score.recorded_at, score.notes,
+            ),
         )
         self._conn.commit()
         return score_id

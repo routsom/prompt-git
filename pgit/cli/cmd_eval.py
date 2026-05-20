@@ -34,7 +34,9 @@ def attach(
         raise typer.Exit(code=1)
     try:
         repo.evals.attach(commit, metric, value, notes)
-        console.print(f"[bold green]✓[/bold green] Attached {metric}={value} to [dim]{commit[:7]}[/dim]")
+        console.print(
+            f"[bold green]✓[/bold green] Attached {metric}={value} to [dim]{commit[:7]}[/dim]"
+        )
     except ValueError as e:
         console.print(f"[bold red]✗[/bold red] {e}")
         raise typer.Exit(code=1)

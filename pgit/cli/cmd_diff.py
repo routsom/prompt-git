@@ -71,12 +71,12 @@ def _print_semantic_diff(sd: SemanticDiff, from_label: str, to_label: str) -> No
     console.print(f"  [bold]Summary:[/bold]   {sd.summary}")
 
     if sd.additions:
-        console.print(f"\n  [bold green]Added:[/bold green]")
+        console.print("\n  [bold green]Added:[/bold green]")
         for a in sd.additions:
             console.print(f"              - {a}")
 
     if sd.removals:
-        console.print(f"\n  [bold red]Removed:[/bold red]")
+        console.print("\n  [bold red]Removed:[/bold red]")
         for r in sd.removals:
             console.print(f"              - {r}")
 
@@ -84,7 +84,7 @@ def _print_semantic_diff(sd: SemanticDiff, from_label: str, to_label: str) -> No
         console.print(f"\n  [bold magenta]Tone:[/bold magenta]      {sd.tone_shift}")
 
     if sd.structural_changes:
-        console.print(f"\n  [bold blue]Structure:[/bold blue]")
+        console.print("\n  [bold blue]Structure:[/bold blue]")
         for s in sd.structural_changes:
             console.print(f"              - {s}")
 

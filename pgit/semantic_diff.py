@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from pgit.objects import SemanticDiff, hash_blob
 from pgit.store import ObjectStore
@@ -93,7 +93,7 @@ def generate_semantic_diff(
         raw_text = raw_text.split("\n", 1)[-1].rsplit("```", 1)[0].strip()
     parsed = json.loads(raw_text)
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     diff = SemanticDiff(
         from_hash=from_hash,
         to_hash=to_hash,

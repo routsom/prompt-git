@@ -12,7 +12,9 @@ console = Console()
 
 def merge(
     branch: str = typer.Argument(..., help="Branch to merge."),
-    if_better: str | None = typer.Option(None, "--if-better", help="Only merge if eval metric is better."),
+    if_better: str | None = typer.Option(
+        None, "--if-better", help="Only merge if eval metric is better."
+    ),
     min_improvement: float = typer.Option(5.0, "--min-improvement", help="Minimum improvement %%."),
 ) -> None:
     """Merge a branch into the current branch."""

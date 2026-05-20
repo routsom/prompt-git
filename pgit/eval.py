@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from pgit.objects import EvalScore
 from pgit.store import ObjectStore
@@ -26,7 +26,7 @@ class EvalManager:
         if not self._store.has_object(commit_hash):
             raise ValueError(f"Commit '{commit_hash[:8]}' not found")
 
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         score = EvalScore(
             commit_hash=commit_hash,
             metric=metric,

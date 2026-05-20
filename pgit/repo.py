@@ -5,14 +5,14 @@ from __future__ import annotations
 import os
 import re
 import subprocess
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from pgit.branch import BranchManager
 from pgit.eval import EvalManager
 from pgit.index import Index
-from pgit.objects import Blob, Commit, SemanticDiff, Tag, Tree
+from pgit.objects import Blob, Commit, Tag, Tree
 from pgit.store import ObjectStore
 
 PROMPTGIT_DIR = ".promptgit"
@@ -120,7 +120,7 @@ class PromptRepo:
         # Get parent
         parent = self.branches.resolve_head()
 
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         commit = Commit.create(
             parent=parent,
             tree=tree.hash,
@@ -236,13 +236,15 @@ class PromptRepo:
         if self.store.find_tag_by_name(name):
             raise ValueError(f"Tag '{name}' already exists")
 
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         tag = Tag.create(name=name, target=commit_hash, message=message, created_at=now)
         self.store.put_tag(tag)
         self.store.set_ref(f"refs/tags/{name}", commit_hash)
         return tag
 
-    def merge(self, branch: str, if_better: str | None = None, min_improvement: float = 5.0) -> Commit:
+    def merge(
+        self, branch: str, if_better: str | None = None, min_improvement: float = 5.0
+    ) -> Commit:
         """Merge a branch into the current branch."""
         current = self.branches.current_branch()
         if current is None:
@@ -264,7 +266,11 @@ class PromptRepo:
             if target_score is None:
                 raise ValueError(f"No '{if_better}' eval score on current branch '{current}'")
 
-            improvement = ((source_score - target_score) / abs(target_score)) * 100 if target_score != 0 else 100
+            improvement = (
+                ((source_score - target_score) / abs(target_score)) * 100
+                if target_score != 0
+                else 100
+            )
             if improvement < min_improvement:
                 raise ValueError(
                     f"Merge rejected: {if_better} improvement is {improvement:.1f}% "
@@ -295,7 +301,7 @@ class PromptRepo:
         self.store.put_tree(merge_tree)
 
         author = self._get_author()
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         merge_commit = Commit.create(
             parent=target_hash,
             tree=merge_tree.hash,

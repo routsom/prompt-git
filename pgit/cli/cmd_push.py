@@ -26,7 +26,9 @@ def push(
 
     remote_url = remote or os.environ.get("PGIT_REMOTE_URL")
     if not remote_url:
-        console.print("[bold red]✗[/bold red] No remote specified. Pass a path or set PGIT_REMOTE_URL.")
+        console.print(
+            "[bold red]✗[/bold red] No remote specified. Pass a path or set PGIT_REMOTE_URL."
+        )
         raise typer.Exit(code=1)
 
     branch_name = branch or repo.branches.current_branch() or "main"
